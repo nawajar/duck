@@ -27,7 +27,7 @@ pipeline {
                         withCredentials(bindings: [sshUserPrivateKey(credentialsId: 'DEV_SERVER', keyFileVariable: 'SSH_KEY_FOR_DEV')]) {
                             sh """
                                     ssh -i $SSH_KEY_FOR_DEV -t -oStrictHostKeyChecking=no nc-user@nc-machine \"
-                                    sed -i 's/API_TAG=.*/API_TAG=dev-${env.GIT_COMMIT[0..7]}/g' /home/pcr/workspace/pcr-deploy/dev/.env
+                                    sed -i 's/API_TAG=.*/API_TAG=dev-${env.GIT_COMMIT[0..7]}/g' /home/nc-user/app/dev/.env
                                     cd /home/nc-user/app
                                     cd dev && ./start-api.sh
                                 \"
