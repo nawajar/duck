@@ -30,7 +30,7 @@ pipeline {
                                     ssh -i $SSH_KEY_FOR_DEV -t -oStrictHostKeyChecking=no nc-user@nc-machine \"
                                     sed -i 's/API_TAG=.*/API_TAG=dev-${env.GIT_COMMIT[0..7]}/g' /home/nc-user/app/dev/.env
                                     cd /home/nc-user/app
-                                    cd dev && ./start-api.sh
+                                    cd dev && ./start-app.sh
                                 \"
                             """
                         }
