@@ -1,14 +1,19 @@
-FROM golang:1.14.3 as build-image
+FROM golang:1.14.3-alpine as build-image
+RUN set -eux; \
+        apk --no-cache add curl git; \
+        curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh;
+
+RUN set -eux; mkdir -p /github.com/nawajar/duck;        
 ENV GO111MODULE=on
-RUN mkdir -p /github.com/nawajar/duck/
 WORKDIR /github.com/nawajar/duck/
 COPY ./src .
 RUN go mod download
-RUN go get github.com/pilu/fresh
 RUN go build -o duck-api-app ./main.go
 
 FROM alpine
 WORKDIR /app
 COPY --from=build-image /github.com/nawajar/duck/duck-api-app /app/
 ENV PORT=8000 
-ENTRYPOINT ./app/duck-api-app 
+WORKDIR /app
+ENTRYPOINT ./duck-api-app 
+
