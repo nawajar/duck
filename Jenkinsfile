@@ -9,7 +9,7 @@ pipeline {
             agent any
             steps {
                 sh """
-                    docker build . \
+                    docker build \
                         -t duck-api:latest \
                         -t duck-api:dev-${env.GIT_COMMIT[0..7]} \
                         .
