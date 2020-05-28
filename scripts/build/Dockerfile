@@ -1,4 +1,4 @@
-FROM golang:1.14.3
+FROM golang:1.14.3 as build-image
 ENV GO111MODULE=on
 RUN mkdir -p /github.com/nawajar/duck/
 WORKDIR /github.com/nawajar/duck/
@@ -11,4 +11,4 @@ FROM alpine
 WORKDIR /app
 COPY --from=build-image /github.com/nawajar/duck/duck-api-app /app/
 ENV PORT=8000 
-ENTRYPOINT ./duck-api-app 
+ENTRYPOINT ./app/duck-api-app 

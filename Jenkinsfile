@@ -10,6 +10,7 @@ pipeline {
             steps {
                 sh """
                     docker build \
+                        -f ./scripts/build/Dockerfile \
                         -t duck-api:latest \
                         -t duck-api:dev-${env.GIT_COMMIT[0..7]} \
                         .
