@@ -6,8 +6,8 @@ import (
 )
 
 type Configuration struct {
-	PORT       string `env:"PORT"`
-	AppURL         string `env:"APP_URL" default:"http://localhost:8000"`
+	PORT   string `env:"PORT"`
+	AppURL string `env:"APP_URL" default:"http://localhost:8000"`
 }
 
 func New() Configuration {
